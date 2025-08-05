@@ -22,9 +22,6 @@
 //
 //
 // -- This will overwrite an existing command --
-
-
-
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add("token", (email, senha) => {
   cy.request({
@@ -39,15 +36,14 @@ Cypress.Commands.add("token", (email, senha) => {
   });
 });
 
-Cypress.Commands.add("cadastrarProduto", (token, preco, descricao, quantidade) => {
+Cypress.Commands.add("cadastrarProduto", (token,produto, preco, descricao, quantidade) => {
   cy.request({
     method: "POST",
     url: "produtos",
     headers: {
-      Authorization: token,
-    },
+      Authorization: token, },
     body: {
-      nome: "produto teste", // coloque um nome fixo ou use outro parâmetro se quiser dinamizar
+      nome:produto,
       preco: preco,
       descricao: descricao,
       quantidade: quantidade,
