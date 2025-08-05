@@ -23,33 +23,35 @@
 //
 // -- This will overwrite an existing command --
 
-const cypress = require("cypress")
+
 
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('token', (email, senha) => { 
-      cy.request({
-      method: 'POST',
-      url: 'login',
-      body: {
-         "email": email,
-            "password": senha
-    }
-  }).then(response => {
-    return response.body.authorization
-  })
-Cypress.Commands.add('cadastrarProduto', (token, preço, descrição, quantidade)=> {
-        cy.request({
-            method: 'POST',
-            url: 'produtos',
-            headers: {
-                Authorization: token},
-            body: {
-            
-                 "nome": produto,
-                   "preco": preço,
-                    "descricao": descrição,
-                       "quantidade": quantidade
-            }, failOnStatusCode: false
-    })
-})
-})
+Cypress.Commands.add("token", (email, senha) => {
+  cy.request({
+    method: "POST",
+    url: "login",
+    body: {
+      email: email,
+      password: senha,
+    },
+  }).then((response) => {
+    return response.body.authorization;
+  });
+});
+
+Cypress.Commands.add("cadastrarProduto", (token, preco, descricao, quantidade) => {
+  cy.request({
+    method: "POST",
+    url: "produtos",
+    headers: {
+      Authorization: token,
+    },
+    body: {
+      nome: "produto teste", // coloque um nome fixo ou use outro parâmetro se quiser dinamizar
+      preco: preco,
+      descricao: descricao,
+      quantidade: quantidade,
+    },
+    failOnStatusCode: false,
+  });
+});
